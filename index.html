@@ -1,7 +1,9 @@
 <!DOCUMENT html>
 <html lang=eng>
     <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
         <title>
             Psychic Game
         </title>
@@ -10,59 +12,65 @@
     <h1>The Psychic Game</h1>
     <h3>Guess what letter I am thinking of</h3>
 
-    <p>
-        Wins:
-        <br>
-        Loses:
-        <br>
-        Guesses remaining:
-        <br>
-        Your guesses so far:
-        <br>
-    </p>
+        <p id='wins'>Wins: </p>
+        <p id='losses'>Losses: </p>
+        <p id='guessesRemaning'>Guesses remaining: </p>
+       
+
+       <img src="assets/images/falci2.jpg" alt="Falci">
 
     <script type="text/javascript">
     
-    var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    var wins = 0;
-    var losses = 0;
-    var guesesRemaining = 9;
-    var lettersGuessed;
-    var userGuess = [];
-    var computerLetter = letters[math.floor(math.random)] * letters.length;
+    var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
+        wins = 0,
+        losses = 0,
+        guessesRemaining,
+        lettersGuessed,
+        userGuess,
+        computerLetter;
+
+    // Start new game
+    reset();
+
     console.log (computerLetter + letters + wins + losses + lettersGuessed + userGuess + computerLetter);
 
-    document.eventlistener 
-    document.onkeyup = function(event){
+    document.addEventListener("keypress", function(event){
+        var userGuess = event.key.toLowerCase();
 
-        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        // if not a letter, break out of function
+        if(letters.indexOf(userGuess) === -1)
+            return;
 
-        var userGuess = event.key;
-        if (userGuess === computerLetter)
-            wins ++;
-            userGuess.length = 0;
-            guesses = 10;
-            computerLetter = letters[math.floor(math.random)] * letters.length;
-        else {
-            (guesses --);
+        if (userGuess === computerLetter){
+            wins++;
+            reset();
+        }
+        else if(lettersGuessed.indexOf(userGuess) == -1){
+            lettersGuessed.push(userGuess);
+            guesses--;
         } 
-        if (guesses === 0);{
-            losses ++
-            guesses = 10;
-            userGuess = [];
-            computerLetter = letters[math.floor(math.random)] * letters.length;
-            console.log(ComputerLetter);
+
+        if (guesses === 0){
+            losses++;
+            reset();
         }
-           
-        
-        }
-    document.getElementById('wins').write = "Wins" + wins;
-    document.getElementById('losses').write = "losses" + losses;
-    document.getElementById('guessesRemaning').write = "guessesRemaining" + guesses
+
+        document.getElementById('wins').textContent = "Wins: " + wins;
+        document.getElementById('losses').textContent = "Losses: " + losses;
+        document.getElementById('guessesRemaning').textContent = "Guesses remaining: " + guesses;
+    });
     
+   
+    
+    // Use reset function to avoid redundant code
+    function reset(){
+        guesses = 10;
+        userGuess = [];
+        lettersGuessed = [];
+        computerLetter = letters[Math.floor(Math.random()*letters.length)];
+    }
     
     </script>
-
 </body>
 
 
