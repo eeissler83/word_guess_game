@@ -15,8 +15,7 @@
         <p id='wins'>Wins: </p>
         <p id='losses'>Losses: </p>
         <p id='guessesRemaning'>Guesses remaining: </p>
-       
-
+        <p id='lettersGuessed'>Letters guessed:</p>
        <img src="assets/images/falci2.jpg" alt="Falci">
 
     <script type="text/javascript">
@@ -25,7 +24,7 @@
         wins = 0,
         losses = 0,
         guessesRemaining,
-        lettersGuessed,
+        lettersGuessed = [],
         userGuess,
         computerLetter;
 
@@ -58,6 +57,7 @@
         document.getElementById('wins').textContent = "Wins: " + wins;
         document.getElementById('losses').textContent = "Losses: " + losses;
         document.getElementById('guessesRemaning').textContent = "Guesses remaining: " + guesses;
+        document.getElementById('lettersGuessed').textContent = "Letters guessed: " + lettersGuessed;
     });
     
    
